@@ -1,3 +1,8 @@
+
+import { Link } from "react-router-dom"
+
+
+
 const Title=()=>{
     return (
         <a href='\'>
@@ -12,9 +17,11 @@ const Header=()=>{
      <div className='nav-items'>
         
         <ul>
-         <li>Home</li>
-         <li>About us</li>
-         <li>contact us</li>
+         <li>
+            <Link to="/">Home</Link>
+         </li>
+         <li><Link to='./Aboutus'>Aboutus</Link></li>
+         <li >contact us</li>
          <li>Location</li>
         </ul>
      </div>
