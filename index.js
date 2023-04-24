@@ -74,28 +74,53 @@
 
  */
 
-import React from 'react'
+import React, { Children } from 'react'
 import ReactDom from "react-dom/client"
+import Aboutus from './Aboutus'
+import Header from './component/head'
+import Body from './component/body'
+import { Footer } from './component/fotter'
+import Error from './error'
 
-import Header from './source/component/head'
-import Body from './source/component/body'
-import { Footer } from './source/component/fotter'
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import RestaurantsMenu from './component/RestaurantsMenu'
 
 
 
 
-
-
-const Applayout=()=>{
+export const Applayout=()=>{
   return (
     <>
     <Header/>
-    <Body/>
+    <Outlet/>
     <Footer/>
     </>
   )
 }
-
+const rout=createBrowserRouter([
+  {
+    path:'/',
+    element:<Applayout/>,
+    errorElement:<Error/>,
+    children: [{
+              path:'/',
+              element:<Body/>
+    },
+    {
+      path:'/Aboutus',
+      element:<Aboutus/>
+    },
+    {
+      path:"restaurant/:rsid",
+      element:<RestaurantsMenu/>
+    }
+  ]
+  },
+  {
+    path:'/Aboutus',
+    element:<Aboutus/>
+  }
+])
 
 const root=ReactDom.createRoot(document.getElementById("root"));
-root.render( <Applayout/>);
+root.render( <RouterProvider router={rout}/>);
